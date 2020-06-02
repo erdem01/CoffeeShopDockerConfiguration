@@ -9,10 +9,8 @@ docker image ls
 
 ## To Create Container
 sudo docker run -d --name coffeeshopproxy erdemc/coffeeshopproxy<br/>
-sudo docker run -d -v /home/erdems/DockerWorkspace/coffeeShop/mysql/datadir:/var/lib/mysql --name coffeeshopdb erdemc/coffeeshopdb
-
-### Share log file with current
-sudo docker run -d -v /home/erdems/DockerWorkspace/coffeeShop/springboot/logs:/usr/src/coffeeshop/logs --name coffeeshopservices erdemc/coffeeshopservices
+sudo docker run -d -v /home/erdems/DockerWorkspace/coffeeShop/mysql/datadir:/var/lib/mysql --name coffeeshopdb erdemc/coffeeshopdb<br/>
+sudo docker run -d --network coffeeshopnetwork --ip 172.20.0.4 -v /home/erdems/DockerWorkspace/coffeeShop/springboot/logs:/usr/src/coffeeshop/logs --name coffeeshopservices erdemc/coffeeshopservices
 
 ## To Start Container
 sudo docker start coffeeshopdb
@@ -45,7 +43,7 @@ sudo docker network ls
 sudo docker run -d --name coffeeshopproxy2 --net=coffeeshopnetwork erdemc/coffeeshopproxy
 
 ### Connect Container to a Network
-sudo docker network connect --ip 172.21.0.3 coffeeshopnetwork coffeeshopdb
+sudo docker network connect --ip 172.20.0.3 coffeeshopnetwork coffeeshopdb
 
 ### Checkout Network Configuration of a Container
 sudo docker network inspect coffeeshopnetwork
